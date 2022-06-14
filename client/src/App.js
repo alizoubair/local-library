@@ -1,25 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
-  const [data, setData] = React.useState(null);
-  const [url, setUrl] = React.useState('/')
-
-  React.useEffect(() => {
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => setData(data.message));
-  }, []);
-
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>{!data ? "Loading..." : data}</p>
-      </header>
-    </div>
-  );
+import React, { Component } from 'react'
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import BookInstance from './components/bookinstance';
+import './App.css'
+export default class App extends Component{
+  render() {
+    return (
+      <BrowserRouter>
+        <div className="App">
+          <div className="navBar">
+            <nav>
+              <ul>
+                <li><Link to="/">Home</Link></li>
+                <li><Link to="/bookinstance/create">Create book instance</Link></li>
+              </ul>
+            </nav>
+          </div>
+          <div className="container">
+            <Routes>
+              <Route path="/bookinstance/create" element={<BookInstance />} />
+            </Routes>
+          </div>
+        </div>
+      </BrowserRouter>
+    );
+  }
+  
 }
-
-export default App;
