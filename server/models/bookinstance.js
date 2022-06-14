@@ -1,18 +1,19 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-var Schema = mongoose.Schema;
+const url = process.env.MONGODB_URI;
 
-var BookInstanceSchema = new Schema(
+const bookInstanceSchema = new mongoose.Schema(
 	{
-		book: {type: Schema.Types.ObjectId, ref: 'Book', require: true},
-		imprint: {type: String, required: true},
-		status: {type: String, required: true, enum: ['Available',
-			'Maintenance', 'Loaned', 'Reserved'], default: 'Maintenance', due_back: {type: Date, default: Date.now}
+		imprint: String
 	}
-);
+)
 
-BookInstanceSchema.virtual('url').get(function () {
-	return '/catalog/bookinstance/' + this._id;
-});
+bookInstanceSchema.set('toJSON', {
+	transform: (document, returnedObject) => {
+		returnedObject.id = returnedObject._id.toString()
+		delete returnedObject._id
+		delete returnedObject.__v
+	}
+})
 
-module.exports = mongoose.model('BookInstance', BookInstanceSchema);
+module.exports = mongoose.model('BookInstance', bookInstanceSchema);

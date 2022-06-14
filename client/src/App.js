@@ -11,13 +11,13 @@ export default class App extends Component{
             <nav>
               <ul>
                 <li><Link to="/">Home</Link></li>
-                <li><Link to="/bookinstance/create">Create book instance</Link></li>
+                <li><Link to="/catalog/bookinstance/create">Create book instance</Link></li>
               </ul>
             </nav>
           </div>
           <div className="container">
             <Routes>
-              <Route path="/bookinstance/create" element={<BookInstance />} />
+              <Route path="/catalog/bookinstance/create" element={<BookInstance />} />
             </Routes>
           </div>
         </div>

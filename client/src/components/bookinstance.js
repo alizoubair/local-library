@@ -1,45 +1,45 @@
-import React, { Component } from 'react';
+/* eslint-disable no-unused-vars */
 import axios from 'axios';
+import React, { Component } from 'react';
 
-export default class bookInstance extends Component {
-    constructor(props) {
-        super(props)
-        this.onChangeImprint = this.onChangeImprint.bind(this)
-        this.onSubmit = this.onSubmit.bind(this)
-        this.state = {
-            imprint: ''
-        }
-    }
+export default class BookInstance extends Component {
+  constructor(props) {
+    super(props)
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = { imprint: '' };
+  }
 
-    onChangeImprint(e) {
-        this.setState({ imprint: e.target.value})
-    }
+  handleChange(e) {
+    this.setState({ value: e.target.value });
+  }
 
-    onSubmit(e) {
-        e.preventDefeault()
-        const bookInstanceObject = {
-            imprint: this.state.imprint
-        };
-        axios.post('http://localhost:3001/catalog/bookinstance/create', bookInstanceObject)
-            .then((res) => {
-                console.log(res.data)
-            }).catch((error) => {
-                console.log(error)
-            })
-        this.setState({ imprint: '' })
-    }
+  handleSubmit(e) {
+    e.preventDefault();
+    const bookInstanceObject = {
+      imprint: this.state.imprint
+    };
+    axios.post('http://localhost/3001/catalog/bookinstance/create', bookInstanceObject)
+      .then((res) => {
+        console.log(res.data);
+      }).catch((error) => {
+        console.log(error);
+      })
+    this.setState({ imprint: '' });
+  }
 
-    render() {
-        return(
-            <div>
-                <h1>Create BookInstance</h1>
-                <form onSubmit={this.onSubmit}>
-                    <div>
-                        <label>Enter imprint:</label>
-                        <input type="text" value={this.state.imprint} onChange={this.onChangeImprint} />
-                    </div>
-                </form>
-            </div>
-        )
-    }
+  render() {
+    return(
+      <div>
+        <h1>Create BookInstance</h1>
+        <form onSubmit={this.handleSubmit}>
+          <div>
+              <label>Enter imprint:</label>
+              <input type="text" onChange={this.handleChange} />
+          </div>
+          <button type="submit" >Submit</button>
+        </form>
+      </div>
+    )
+  }
 }
