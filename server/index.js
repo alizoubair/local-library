@@ -21,11 +21,13 @@ const requestLogger = (request, response, next) => {
 	next()
 }
 
+app.use(express.static('build'));
+
 app.use(cors());
 
-app.use(express.static('build'))
-app.use(bodyParser.json())
-app.use(requestLogger)
+app.use(bodyParser.json());
+
+app.use(requestLogger);
 
 app.use(express.static(path.resolve(__dirname, '../client/build')));
 

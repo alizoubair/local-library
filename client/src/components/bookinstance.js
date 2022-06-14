@@ -7,7 +7,7 @@ export default class BookInstance extends Component {
     super(props)
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.state = { imprint: '' };
+    this.state = { imprint: '' }
   }
 
   handleChange(e) {
@@ -35,7 +35,7 @@ export default class BookInstance extends Component {
         <form onSubmit={this.handleSubmit}>
           <div>
               <label>Enter imprint:</label>
-              <input type="text" onChange={this.handleChange} />
+              <input type="text" value={this.state.imprint} onChange={this.handleChange} />
           </div>
           <button type="submit" >Submit</button>
         </form>
