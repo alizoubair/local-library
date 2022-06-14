@@ -28,11 +28,29 @@ router.post('/bookinstance/:id/update', (request, response) => {
 })
 
 // GET request for one BookInstance.
-router.get('/bookinstance/:id', (request, response) => {
+router.get('/bookinstance/:id', (request, response, next) => {
+	BookInstance.findById(request.params.id)
+		.then(bookinstance => {
+			if (bookinstance) {
+				response.json(bookinstance);
+			} else {
+				response.status(404).end();
+			}
+		})
+		.catch(error => next(error))
 })
 
 // GET request for list of all BookInstance.
-router.get('/bookinstances', (request, response) => {
+router.get('/bookinstances', (request, response, next) => {
+	BookInstance.find()
+		.then(bookinstances => {
+			if (bookinstances) {
+				response.json(bookinstances);
+			} else {
+				response.status(404).end();
+			}
+		})
+		.catch(error => next(error));
 })
 
 module.exports = router;
