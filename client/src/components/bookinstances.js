@@ -1,4 +1,5 @@
 import React ,{ Component } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 export default class BookInstances extends Component {
@@ -11,23 +12,24 @@ export default class BookInstances extends Component {
 		}
 	}
 
-	componentDidUpdate() {
+	componentDidMount() {
 		axios.get('http://localhost:3001/catalog/bookinstances')
 			.then(res => {
-				console.log(res.data);
-				this.setState({ bookInstances: res.data })
+				this.setState({ bookInstances: res.data }, () => {
+					console.log(this.state.bookInstances);
+				});
 			})
 	}
 	
 	BookInstance(props) {
-		return <li>{props.bookInstance}</li>
+		return <li><Link to={`/catalog/bookinstance/${props.bookInstance}`}>{props.bookInstance}</Link></li>
 	}
 
 	BookInstances() {
 		const bookInstances = this.state.bookInstances;
 		if (bookInstances) {
 			return bookInstances.map(bookInstance => {
-				return <this.BookInstance key={bookInstance.id} bookInstance={bookInstance} />
+				return <this.BookInstance key={bookInstance} bookInstance={bookInstance.id} />
 			})
 		}
 	}
