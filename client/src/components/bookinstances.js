@@ -1,6 +1,8 @@
-import React ,{ Component } from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import BookInstancesDetails from './bookinstance_details'
 
 export default class BookInstances extends Component {
 	constructor(props) {
@@ -20,7 +22,7 @@ export default class BookInstances extends Component {
 				});
 			})
 	}
-	
+
 	BookInstance(props) {
 		return <li><Link to={`/catalog/bookinstance/${props.bookInstance}`}>{props.bookInstance}</Link></li>
 	}

@@ -19,12 +19,27 @@ router.post('/bookinstance/create', (request, response, next) => {
 })
 
 // POST request to delete BookInstance.
-router.post('/bookinstance/:id/delete', (request, response) => {
+router.delete('/bookinstance/:id/delete', (request, response, next) => {
+	BookInstance.findByIdAndRemove(request.params.id)
+		.then(result => {
+			response.status(204).end()
+		})
+		.catch(error => next(error))
 })
 
 // POST requst to update BookInstance.
-router.post('/bookinstance/:id/update', (request, response) => {
+router.put('/bookinstance/:id/update', (request, response) => {
+	const body = request.body
 
+	const bookInstance = {
+		imprint: body.imprint
+	}
+
+	BookInstance.findByIdAndUpdate(request.params.id, bookinstance, { new: true })
+		.then(updatedBookInstance => {
+			response.json(updatedBookInstance)
+		})
+		.catch(error => next(error))
 })
 
 // GET request for one BookInstance.
