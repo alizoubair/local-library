@@ -1,45 +1,41 @@
 /* eslint-disable no-unused-vars */
 import axios from 'axios';
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 
-export default class BookInstanceCreate extends Component {
-  constructor(props) {
-    super(props)
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.state = { imprint: '' }
-  }
+function BookInstanceCreate() {
+    const [imprint, setImprint] = useState('');
 
-  handleChange(e) {
-    this.setState({ value: e.target.value });
-  }
+    const handleChange = (e) => {
+        setImprint({ value: e.target.value }, () => {
+            console.log(imprint);
+        });
+    }
 
-  handleSubmit(e) {
-    e.preventDefault();
-    const bookInstanceObject = {
-      imprint: this.state.imprint
-    };
-    axios.post('http://localhost/3001/catalog/bookinstance/create', bookInstanceObject)
-      .then((res) => {
-        console.log(res.data);
-      }).catch((error) => {
-        console.log(error);
-      })
-    this.setState({ imprint: '' });
-  }
+    const handleSubmit = () => {
+        const bookInstanceObject = {
+            imprint: imprint
+        };
 
-  render() {
-    return(
-      <div>
-        <h1>Create BookInstance</h1>
-        <form onSubmit={this.handleSubmit}>
-          <div>
-              <label>Enter imprint:</label>
-              <input type="text" value={this.state.imprint} onChange={this.handleChange} />
-          </div>
-          <button type="submit" >Submit</button>
-        </form>
-      </div>
+        axios.post('http://localhost:3001/catalog/bookinstance/create', bookInstanceObject)
+            .then((res) => {
+                console.log(res.data);
+            }).catch((error) => {
+                console.log(error);
+            })
+    }
+
+    return (
+        <div>
+            <h1>Create BookInstance</h1>
+            <form onSubmit={handleSubmit}>
+                <div>
+                    <label>Imprint:</label>
+                    <input type="text" onChange={handleChange} />
+                </div>
+                <button type="submit" >Submit</button>
+            </form>
+        </div>
     )
-  }
 }
+
+export default BookInstanceCreate;

@@ -1,25 +1,31 @@
-import React, { Component } from 'react';
+import React from 'react';
 import axios from 'axios';
+import { useParams, Link } from 'react-router-dom';
 
-export default class BookInstance extends Component {
-	constructor(props) {
-		super(props)
-		this.state = { 
-			id: ''
-		}
-	}
-	componentDidMount() {
-		axios.get('http://localhost:3001/catalog/bookinstance/:id')
+function BookInstance() {
+	const params = useParams();
+
+	const handleDelete = () => {
+		axios.delete(`http://localhost:3001/catalog/bookinstance/${params.id}/delete`)
 			.then(res => {
-				this.setState({ id: res.data.id });
+				console.log("BookInstance deleted!");
 			})
-			.catch(function (error) {
+			.catch(error => {
 				console.log(error);
 			})
 	}
-	render() {
-		return (
-			<h1>ID: {this.state.id}</h1>
-		)
-	}
+
+	return (
+		<div>
+			<h1>ID: {params.id}</h1>
+
+			<div>
+				<button onClick={handleDelete}>Delete</button>
+				<button><Link to={`/catalog/bookinstance/${params.id}/update`}>Update</Link></button>
+			</div>
+			
+		</div>
+	)
 }
+
+export default BookInstance;

@@ -28,14 +28,14 @@ router.delete('/bookinstance/:id/delete', (request, response, next) => {
 })
 
 // POST requst to update BookInstance.
-router.put('/bookinstance/:id/update', (request, response) => {
+router.put('/bookinstance/:id/update', (request, response, next) => {
 	const body = request.body
 
 	const bookInstance = {
 		imprint: body.imprint
 	}
 
-	BookInstance.findByIdAndUpdate(request.params.id, bookinstance, { new: true })
+	BookInstance.findByIdAndUpdate(request.params.id, bookInstance, { new: true })
 		.then(updatedBookInstance => {
 			response.json(updatedBookInstance)
 		})
