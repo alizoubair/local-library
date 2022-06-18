@@ -51,7 +51,7 @@ router.post('/', (request, response, next) => {
 // POST request to delete Author.
 router.delete('/:id', (request, response, next) => {
     Author.findByIdAndRemove(request.params.id)
-        .then(result => {
+        .then(response => {
             response.status(400).end()
         })
         .catch((error) => next(error))
@@ -60,8 +60,7 @@ router.delete('/:id', (request, response, next) => {
 // POST reuqest to update Auhtor.
 router.put('/:id', (request, response, next) => {
     const body = request.body
-    console.log(body)
-
+    
     const author = {
         first_name: body.first_name,
         family_name: body.family_name,
