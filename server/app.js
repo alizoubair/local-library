@@ -7,7 +7,8 @@ const app = express();
 const logger = require('./utils/logger')
 const middleware = require('./utils/middleware')
 const config = require('./utils/config')
-const catalogRouter = require('./controllers/catalog')
+const bookinstancesRouter = require('./controllers/bookinstances')
+const authorsRouter = require('./controllers/auhtors')
 
 const path = require('path')
 
@@ -34,8 +35,9 @@ mongoose.connect(process.env.MONGODB_URI)
     console.log('error connection to MongoDB:', error.message)
   })
 
-app.use('/', router);
-app.use('/catalog', catalogRouter)
+app.use('/', router)
+app.use('/api/bookinstances', bookinstancesRouter)
+app.use('/api/authors', authorsRouter)
 
 app.use(middleware.unknownEndpoint)
 app.use(middleware.errorHandler)

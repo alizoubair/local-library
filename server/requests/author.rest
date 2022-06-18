@@ -1,0 +1,31 @@
+GET http://localhost:3001/api/authors
+
+###
+POST http://localhost:3001/api/authors
+Content-Type: application/json
+
+{
+    "first_name": "Barbara",
+    "family_name": "Zoubair",
+    "date_of_birth": "1998-06-30",
+    "date_of_death": "1998-06-30"
+
+}
+
+###
+GET http://localhost:3001/api/authors/62adc2f3b3a621a28f724c02
+
+###
+DELETE  http://localhost:3001/api/authors/62adc2f3b3a621a28f724c02
+
+### 
+PUT http://localhost:3001/api/authors/62adc2dbb3a621a28f724bff
+Content-Type: application/json
+
+{
+    "first_name": "Barbara",
+    "family_name": "Zoubair",
+    "date_of_birth": "1998-06-31",
+    "date_of_death": "1998-06-30"
+
+}
