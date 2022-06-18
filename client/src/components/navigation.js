@@ -22,6 +22,12 @@ export default class Navigation extends Component {
                         <li>
                             <NavLink to='/api/authors'>Create author</NavLink>
                         </li>
+                        <li>
+                            <NavLink to='/api/books'>Create Book</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to='/api/books'>All books</NavLink>
+                        </li>
                     </ul>                    
                 </nav>
             </div>

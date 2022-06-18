@@ -27,8 +27,6 @@ function Author() {
             date_of_death: state.dateOfDeath
         }
 
-        console.log(author)
-
         axios.post('http://localhost:3001/api/authors', author)
             .then((response) => {
                 console.log(response.data)

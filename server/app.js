@@ -7,8 +7,10 @@ const app = express();
 const logger = require('./utils/logger')
 const middleware = require('./utils/middleware')
 const config = require('./utils/config')
+
 const bookinstancesRouter = require('./controllers/bookinstances')
 const authorsRouter = require('./controllers/auhtors')
+const booksRouter = require('./controllers/books')
 
 const path = require('path')
 
@@ -38,6 +40,7 @@ mongoose.connect(process.env.MONGODB_URI)
 app.use('/', router)
 app.use('/api/bookinstances', bookinstancesRouter)
 app.use('/api/authors', authorsRouter)
+app.use('/api/books', booksRouter)
 
 app.use(middleware.unknownEndpoint)
 app.use(middleware.errorHandler)

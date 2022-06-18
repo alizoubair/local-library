@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const Author = require('../models/book')
+const Book = require('../models/book')
 
 /// Book ///
 
@@ -19,7 +19,7 @@ router.get('/', (request, response, next) => {
 })
 
 // GET request for one Book.
-routre.get('/:id', (request, response, next) => {
+router.get('/:id', (request, response, next) => {
     Book.findById(request.params.id)
         .then(book => {
             if (book) {
@@ -34,16 +34,16 @@ routre.get('/:id', (request, response, next) => {
 })
 
 // POST request to create Book.
-router.post('/', (reqiest, response, next) => {
+router.post('/', (request, response, next) => {
     const body = request.body
 
-    const book = {
+    const book = new Book ({
         title: body.title,
         author: body.author,
         summary: body.summary,
         isbn: body.isbn,
         genre: body.genre
-    }
+    })
 
     book.save().then(savedBook => {
         response.json(savedBook.toJSON())
