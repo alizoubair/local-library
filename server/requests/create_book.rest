@@ -1,6 +1,6 @@
-POST http://localhost:3001/catalog/bookinstance/create
+POST http://localhost:3001/catalog/bookinstance/
 Content-Type: application/json
 
 {
-    "imprint": "f"
+    "imprint": "add imprint"
 }

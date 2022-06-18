@@ -6,7 +6,7 @@ function BookInstance() {
 	const params = useParams();
 
 	const handleDelete = () => {
-		axios.delete(`http://localhost:3001/catalog/bookinstance/${params.id}/delete`)
+		axios.delete(`http://localhost:3001/catalog/bookinstance/${params.id}`)
 			.then(res => {
 				console.log("BookInstance deleted!");
 			})
